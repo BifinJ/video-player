@@ -1,0 +1,63 @@
+{
+  "name": "syncplay",
+  "version": "1.0.0",
+  "description": "Collaborative Local Video Player with Voice Chat",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build": "vite build && electron-builder",
+    "server": "node server/server.js",
+    "postinstall": "chmod +x install-codecs.sh && ./install-codecs.sh || true"
+  },
+  "keywords": [
+    "electron",
+    "video",
+    "webrtc",
+    "collaboration"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.16",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^8.2.2",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-rebuild": "^3.2.9",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.16",
+    "vite": "^5.0.8",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "simple-peer": "^9.11.1",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1"
+  },
+  "build": {
+    "appId": "com.syncplay.app",
+    "productName": "SyncPlay",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
